@@ -1,25 +1,38 @@
 import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux';
+//import { DecAction, IncAction } from './actions';  // with actions
 
-function App() {
+// function App({local_count,DecAction, IncAction }) {   //with actions
+
+function App({local_count,dispatch }) {
+console.log(local_count)
+const IncAction=()=>{
+  dispatch({type:'INCREMENT'})
+}
+const DecAction=()=>{
+  dispatch({type:'DECREMENT'})
+}
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Conter Application</h1>
+      <h1>{local_count}</h1>
+      <button onClick={IncAction} >
+        Increment
+      </button>
+      <button onClick={DecAction}>
+        Decrement
+      </button>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps=state=>({
+local_count:state
+})
+
+
+//export default connect(mapStateToProps,{ DecAction, IncAction })(App); //with actions
+export default connect(mapStateToProps)(App);
